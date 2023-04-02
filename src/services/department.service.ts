@@ -66,7 +66,8 @@ export class DepartmentService {
 
     async getDepartmentUserCount() {
         return new Promise((resolve, reject) => {
-            db.query("SELECT d.id, d.name, COUNT(u.id) AS userCount FROM department d LEFT JOIN user u ON d.id = u.departmentId GROUP BY d.id", (err, results) => {
+            db.query(`SELECT d.id, d.name, d.description, COUNT(u.id) AS
+             userCount FROM department d LEFT JOIN user u ON d.id = u.departmentId GROUP BY d.id`, (err, results) => {
                 if (err) {
                     reject(err);
                 }

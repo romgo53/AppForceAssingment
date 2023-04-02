@@ -11,7 +11,7 @@ departmentRouter.get("/byId/:id", departmentController.getDepartmentById);
 
 departmentRouter.post("/", departmentController.createDepartment);
 
-departmentRouter.put("/:id", departmentController.updateDepartment);
+departmentRouter.patch("/:id", departmentController.updateDepartment);
 
 departmentRouter.delete("/:id", departmentController.deleteDepartment);
 
