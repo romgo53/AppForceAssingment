@@ -7,8 +7,6 @@
     "start": "pm2 start dist/index.js --watch",
     "stop": "pm2 stop dist/index.js",
     "dev": "nodemon ./src/index.ts",
-    "predev": "npm run swagger",
-    "prebuild": "npm run swagger",
     "build": "tsc",
     "swagger": "tsoa spec"
   },
