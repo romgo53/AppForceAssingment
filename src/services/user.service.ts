@@ -5,10 +5,10 @@ import { Filter } from "../models/filter.models";
 import { RowDataPacket } from "mysql2";
 
 export class UserService {
-  async getAllUsers(filter: Filter) {
+  async getAllUsers(filterQuery: string) {
     return new Promise((resolve, reject) => {
       db.query(`SELECT user.*, department.name AS departmentName FROM company.user
-       LEFT JOIN company.department ON user.departmentId = department.id LIMIT ${filter.limit} OFFSET ${filter.offset}`,
+       LEFT JOIN company.department ON user.departmentId = department.id ${filterQuery}`,
        (err, results) => {
         if (err) {
           reject(err);

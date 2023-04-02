@@ -18,7 +18,7 @@ export namespace Filter {
         limit: 10
     };
 
-    export function fromQueryParam(queryParams: any): Filter {
+    export function buildQueryFromQueryParam(queryParams: any): string {
         const filter = {} as Filter;
 
         if(!!queryParams.search) {
@@ -42,14 +42,21 @@ export namespace Filter {
         } else {
             filter.page = Default.page;
         }
-        if(!!queryParams.limit && !isNaN(queryParams.page)) {
+        if(!!queryParams.limit && !isNaN(queryParams.limit)) {
             filter.limit = +queryParams.limit;
         } else {
             filter.limit = Default.limit;
         }
         filter.offset = (filter.page - 1) * filter.limit;
-        
-        return filter;
+
+        let query = '';
+        if (filter.search != ''){
+            query = `WHERE user.firstName LIKE '%${filter.search}%' ORDER BY ${filter.sortBy} ${filter.sortDirection} LIMIT ${filter.limit} OFFSET ${filter.offset}`
+        } else {
+            query = `ORDER BY ${filter.sortBy} ${filter.sortDirection} LIMIT ${filter.limit} OFFSET ${filter.offset}`
+        }
+        console.log(query);
+        return query;
 
 } 
 }

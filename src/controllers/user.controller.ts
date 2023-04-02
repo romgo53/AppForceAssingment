@@ -21,8 +21,11 @@ export class UserController {
     public getAllUsers = async (
         request: Request,
         response: Response) => {
-        const users = await this.userService.getAllUsers(Filter.fromQueryParam(request.query));
-        // const users = await this.userService.getAlltest();
+        const users = await this.userService.getAllUsers(Filter.buildQueryFromQueryParam(request.query))
+        .catch((err) => {
+            response.status(400).send({details: err.sqlMessage, message: "Unable to get users"});
+            return;
+        });
         response.send(users);
     }
 
