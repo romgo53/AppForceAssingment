@@ -1,17 +1,10 @@
 import {
-    Body,
-    Controller,
     Get,
-    Path,
-    Post,
-    Query,
     Route,
-    SuccessResponse,
   } from "tsoa";
 import { Request, Response } from 'express';
 import { UserDtos } from '../dtos/user.dtos';
 import { UserService } from '../services/user.service';
-import { User } from '../models/user.models';
 import { Filter } from "../models/filter.models";
 
 @Route("users")
