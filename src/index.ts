@@ -1,6 +1,7 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
+import morgan from "morgan";
+
 import { userRouter } from './routes/user.route';
 import { departmentRouter } from './routes/department.route';
 import swaggerUi from "swagger-ui-express";
@@ -9,8 +10,10 @@ import { loggerMiddleware } from './middlewares/logger.middleware';
 const app = express();
 
 // middlewares
-app.use(loggerMiddleware);
+// app.use(loggerMiddleware);
 app.use(express.json());
+app.use(morgan("dev"));
+app.use(express.static("dist"));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,8 +23,7 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(undefined, {
       swaggerOptions: {
-        url: "/swagger.json",
-        
+        url: "/swagger.json", 
       },
     
     }));

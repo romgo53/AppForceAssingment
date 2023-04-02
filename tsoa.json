@@ -1,5 +1,6 @@
 {
     "entryFile": "src/index.ts",
+    "specFileBaseName": "dist/swagger.json",
     "controllerPathGlobs": ["src/controllers/*.ts"],
     "noImplicitAdditionalProperties": "throw-on-extras",
     "spec": {

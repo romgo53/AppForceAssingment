@@ -18,12 +18,15 @@ import { Filter } from "../models/filter.models";
 export class UserController {
     private userService: UserService = new UserService();
     @Get("/")
-    public getAllUsers = async (request: Request, response: Response) => {
+    public getAllUsers = async (
+        request: Request,
+        response: Response) => {
         const users = await this.userService.getAllUsers(Filter.fromQueryParam(request.query));
         // const users = await this.userService.getAlltest();
         response.send(users);
     }
 
+    @Get("/byId/{id}")
     public getUserById = async (request: Request, response: Response) => {
         const [user] = await this.userService.getUserById(request.params.id);
         if (user) {
