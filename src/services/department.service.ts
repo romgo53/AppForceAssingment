@@ -1,3 +1,4 @@
+import { DepartmentDtos } from "@/dtos/department.dtos";
 import { Department } from "@/models/department.model";
 import db from "../config/db.config";
 export class DepartmentService {
@@ -26,7 +27,7 @@ export class DepartmentService {
         });
     }
 
-    async createDepartment(department: Department) {
+    async createDepartment(department: DepartmentDtos) {
         return new Promise((resolve, reject) => {
             db.query("INSERT INTO department SET ?", [department], (err, results) => {
                 if (err) {
@@ -38,7 +39,7 @@ export class DepartmentService {
         });
     }
 
-    async updateDepartment(id: string, department: Department) {
+    async updateDepartment(id: string, department: DepartmentDtos) {
         return new Promise((resolve, reject) => {
             db.query("UPDATE department SET ? WHERE id = ?", [department, id], (err, results) => {
                 if (err) {
