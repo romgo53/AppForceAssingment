@@ -36,7 +36,7 @@ export class DepartmentController {
             response.status(400).send({details: err.sqlMessage, message: "Unable to get department"});
             return;
         });;
-        return newDepartment;
+        response.send(newDepartment);
     }
 
     public updateDepartment = async (request: Request, response: Response) => {

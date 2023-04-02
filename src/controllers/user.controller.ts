@@ -55,6 +55,11 @@ export class UserController {
 
     public updateUser = async (request: Request, response: Response) => {
         const user: UserDtos = request.body;
+        const res = UserDtos.validate(user);
+        if (res) {
+            response.status(400).send({details: res, message: "Unable to update user"});
+            return;
+        }
         const updatedUser = await this.userService.updateUser(request.params.id, user)
         .catch((err) => {
             response.status(400).send({details: err.sqlMessage, message: "Unable to update user"});
